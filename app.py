@@ -60,6 +60,12 @@ def main():
     			),
     			zoom= 0.5,
     			style= map_style
+    		),
+		margin= do.layout.Margin(
+    			l=0,
+    			r=0,
+    			t=0,
+    			b=0
     		)
 	)
 
