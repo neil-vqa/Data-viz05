@@ -2,12 +2,14 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as do
 import streamlit as st
+import os
 
+token_map= os.environ.get('MAPBOX_TOKEN')
+style_map= os.environ.get('MAPBOX_STYLE')
 
 @st.cache
 def data_load():
 	return pd.read_excel('Volcano Eruptions (mod).xlsx')
-
 
 def main():
 	data = data_load()
@@ -21,8 +23,8 @@ def main():
 	st.markdown('*It is recommended to view the map in full screen for better interactivity. Click the control in the top right corner of the map to go full screen.*')
 
 	midpoint = (np.average(data['latitude']), np.average(data['longitude']))
-	map_token = 'pk.eyJ1IjoibmVpbHRoZWdyZWF0ZXN0IiwiYSI6ImNrM2ZqMmhvNjAzN2QzbW5uaHQyamo5NGkifQ.l53kgbZcDGY8U8xHkSWv0w'
-	map_style = 'mapbox://styles/neilthegreatest/ck5uymies43dg1iqko1h41v1f'
+	map_token = token_map
+	map_style = style_map
 
 	vulcan_lat = list(df['latitude'])
 	vulcan_lon = list(df['longitude'])
@@ -68,8 +70,6 @@ def main():
     			b=0
     		)
 	)
-
-
 	st.plotly_chart(plot,use_container_width=True)
 	
 	st.markdown('Data Source: Global Volcanism Program | Viz by: nvqa')
@@ -77,4 +77,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
